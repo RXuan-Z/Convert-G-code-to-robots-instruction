@@ -1,5 +1,5 @@
-readfilename = 'T型刀粗加工.txt'
-writefilename = 'T型刀粗加工(转换).txt'
+readfilename = '1.txt'
+writefilename = '1.txt'
 speed = 2  # 走刀速度
 
 P = 0  # 序号
