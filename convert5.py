@@ -1,7 +1,7 @@
 from math import cos, sin
 
-readfilename = '球面铣刀半精加工.txt'
-writefilename = '球面铣刀半精加工(转换).txt'
+readfilename = '1.txt'
+writefilename = '1.txt'
 speed = 2  # 走刀速度
 
 P = 0  # 序号
