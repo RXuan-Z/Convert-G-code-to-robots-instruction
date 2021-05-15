@@ -1,11 +1,33 @@
+import math
 from math import cos, sin
 
-readfilename = '球面铣刀半精加工.txt'
-writefilename = '球面铣刀半精加工(转换).txt'
+readfilename = '1.txt'
+writefilename = '1-1.txt'
 speed = 2  # 走刀速度
 
 P = 0  # 序号
 alpha = 0
+
+
+def G1WriteMoveInstrucion(speedi, x, y, z, q1, q2, q3, q4):
+    if speedi == 1:
+        w.write(
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(
+                z) + "],[" + q1 + ',' + q2 + ',' + q3 + ',' + q4 + ']' + ",[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v5,fine,MyTool;\n")
+
+    elif speedi == 2:
+        w.write(
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(
+                z) + "],[" + q1 + ',' + q2 + ',' + q3 + ',' + q4 + ']' + ",[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v10,fine,MyTool;\n")
+    elif speedi == 3:
+        w.write(
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(
+                z) + "],[" + q1 + ',' + q2 + ',' + q3 + ',' + q4 + ']' + ",[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v7,fine,MyTool;\n")
+    else:
+        pass
 
 
 def g0(a):  # 行序号引入
@@ -40,18 +62,26 @@ def g0(a):  # 行序号引入
         x = round(x, 3)
         y = round(y, 3)
         z = round(z, 3)  # 保留三位小数
-        q1 = round(cos(0.5 * gamma) * cos(0.5 * beta) * cos(0.5 * alpha) + sin(0.5 * gamma) * sin(0.5 * beta) * sin(
-            0.5 * alpha), 3)
-        q2 = round(sin(0.5 * gamma) * cos(0.5 * beta) * cos(0.5 * alpha) - cos(0.5 * gamma) * sin(0.5 * beta) * sin(
-            0.5 * alpha), 3)
-        q3 = round(cos(0.5 * gamma) * sin(0.5 * beta) * cos(0.5 * alpha) + sin(0.5 * gamma) * cos(0.5 * beta) * sin(
-            0.5 * alpha), 3)
-        q4 = round(cos(0.5 * gamma) * cos(0.5 * beta) * sin(0.5 * alpha) - sin(0.5 * gamma) * sin(0.5 * beta) * cos(
-            0.5 * alpha), 3)
-        w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
+        q1 = round(
+            cos(math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 * 0.5 * alpha) + sin(
+                math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        q2 = round(
+            sin(math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 * 0.5 * alpha) - cos(
+                math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        q3 = round(
+            cos(math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 * 0.5 * alpha) + sin(
+                math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        q4 = round(
+            cos(math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 * 0.5 * alpha) - sin(
+                math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        w.write("P0:=[[" + str(x) + ',' + str(y) + ',' + str(z) + ']')
         w.write(',[' + str(q1) + ',' + str(q2) + ',' + str(q3) + ',' + str(
             q4) + ']' + ',[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-        w.write('MoveJ P' + str(P) + ',V40,fine,tool2;\n')
+        w.write('MoveJ P0,v40,fine,MyTool;\n')
         P += 1
         aa += 1
 
@@ -88,36 +118,32 @@ def g1(a):  # 行序号引入
         x = round(x, 3)
         y = round(y, 3)
         z = round(z, 3)  # 保留三位小数
-        q1 = round(cos(0.5 * gamma) * cos(0.5 * beta) * cos(0.5 * alpha) + sin(0.5 * gamma) * sin(0.5 * beta) * sin(
-            0.5 * alpha), 3)
-        q2 = round(sin(0.5 * gamma) * cos(0.5 * beta) * cos(0.5 * alpha) - cos(0.5 * gamma) * sin(0.5 * beta) * sin(
-            0.5 * alpha), 3)
-        q3 = round(cos(0.5 * gamma) * sin(0.5 * beta) * cos(0.5 * alpha) + sin(0.5 * gamma) * cos(0.5 * beta) * sin(
-            0.5 * alpha), 3)
-        q4 = round(cos(0.5 * gamma) * cos(0.5 * beta) * sin(0.5 * alpha) - sin(0.5 * gamma) * sin(0.5 * beta) * cos(
-            0.5 * alpha), 3)
-        if speed == 1:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-            w.write(',[' + str(q1) + ',' + str(q2) + ',' + str(q3) + ',' + str(
-                q4) + ']' + ',[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveL P' + str(P) + ',V4.75,fine,tool2;\n')
-        elif speed == 2:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-            w.write(',[' + str(q1) + ',' + str(q2) + ',' + str(q3) + ',' + str(
-                q4) + ']' + ',[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveL P' + str(P) + ',V10,fine,tool2;\n')
-        elif speed == 3:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-            w.write(',[' + str(q1) + ',' + str(q2) + ',' + str(q3) + ',' + str(
-                q4) + ']' + ',[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveL P' + str(P) + ',V7.33,fine,tool2;\n')
-        else:
-            pass
+        q1 = round(
+            cos(math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 * 0.5 * alpha) + sin(
+                math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        q2 = round(
+            sin(math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 * 0.5 * alpha) - cos(
+                math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        q3 = round(
+            cos(math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 * 0.5 * alpha) + sin(
+                math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        q4 = round(
+            cos(math.pi / 180 * 0.5 * gamma) * cos(math.pi / 180 * 0.5 * beta) * sin(math.pi / 180 * 0.5 * alpha) - sin(
+                math.pi / 180 * 0.5 * gamma) * sin(math.pi / 180 * 0.5 * beta) * cos(math.pi / 180 *
+                                                                                     0.5 * alpha), 3)
+        G1WriteMoveInstrucion(speed, str(x), str(y), str(z), str(q1), str(q2), str(q3), str(q4))
         P += 1
         aa += 1
 
 
 with open(writefilename, 'w') as w:
+    w.write("MODULE Cut\n")
+    w.write("var robtarget P0;\n")
+    w.write("var robtarget P1;\n")
+    w.write("PROC MoveSub()\n")
     with open(readfilename) as f:
         lines = f.readlines()
     tol = len(lines)
@@ -137,3 +163,5 @@ with open(writefilename, 'w') as w:
             g1(i)
         else:
             continue
+    w.write("END PROC\n")
+    w.write("ENDMODULE")
