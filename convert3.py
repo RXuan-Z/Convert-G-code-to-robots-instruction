@@ -2,6 +2,7 @@ readfilename = '1.txt'
 writefilename = '1-1.txt'
 speed = 1  # 走刀速度
 
+
 P = 0  # 序号
 
 
