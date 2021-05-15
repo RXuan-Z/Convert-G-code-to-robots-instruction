@@ -1,8 +1,50 @@
 readfilename = '1.txt'
-writefilename = '1.txt'
-speed = 2  # 走刀速度
+writefilename = '1-1.txt'
+speed = 1  # 走刀速度
+
 
 P = 0  # 序号
+
+
+def G23WriteMoveInstrucion(speedi, x1, y1, x2, y2, z):
+    if speedi == 1:
+        w.write(
+            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write(
+            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveC P01,P02,V5,fine,MyTool;\n')
+    elif speedi == 2:
+        w.write(
+            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write(
+            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveC P01,P02,V10,fine,MyTool;\n')
+    elif speedi == 3:
+        w.write(
+            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write(
+            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveC P01,P02,V7,fine,MyTool;\n')
+    else:
+        pass
+
+
+def G1WriteMoveInstrucion(speedi, x, y, z):
+    if speedi == 1:
+        w.write(
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v5,fine,MyTool;\n")
+
+    elif speedi == 2:
+        w.write(
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v10,fine,MyTool;\n")
+    elif speedi == 3:
+        w.write(
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v7,fine,MyTool;\n")
+    else:
+        pass
 
 
 def g0(a):  # 行序号引入
@@ -33,9 +75,9 @@ def g0(a):  # 行序号引入
         x = round(x, 3)
         y = round(y, 3)
         z = round(z, 3)  # 保留三位小数
-        w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-        w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-        w.write('MoveJ P' + str(P) + ',V40,fine,tool2;\n')
+        w.write(
+            "P0:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveJ P0,v40,fine,MyTool;\n')
         P += 1
         aa += 1
 
@@ -68,20 +110,8 @@ def g1(a):  # 行序号引入
         x = round(x, 3)
         y = round(y, 3)
         z = round(z, 3)  # 保留三位小数
-        if speed == 1:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveL P' + str(P) + ',V4.75,fine,tool2;\n')
-        elif speed == 2:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveL P' + str(P) + ',V10,fine,tool2;\n')
-        elif speed == 3:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x) + ',' + str(y) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveL P' + str(P) + ',V7.33,fine,tool2;\n')
-        else:
-            pass
+        G1WriteMoveInstrucion(speed, str(x), str(y), str(z))
+
         P += 1
         aa += 1
 
@@ -126,26 +156,8 @@ def g2(a):  # 行序号引入
         x2 = round(x2, 3)
         y1 = round(y1.real, 3)
         y2 = round(y2.real, 3)  # 保留三位小数
-        if speed == 1:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x1) + ',' + str(y1) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('CONST robtarget P' + str(P + 1) + ':=[[' + str(x2) + ',' + str(y2) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveC P' + str(P) + ',P' + str(P + 1) + ',V4.75,fine,tool2;\n')
-        elif speed == 2:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x1) + ',' + str(y1) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('CONST robtarget P' + str(P + 1) + ':=[[' + str(x2) + ',' + str(y2) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveC P' + str(P) + ',P' + str(P + 1) + ',V10,fine,tool2;\n')
-        elif speed == 3:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x1) + ',' + str(y1) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('CONST robtarget P' + str(P + 1) + ':=[[' + str(x2) + ',' + str(y2) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveC P' + str(P) + ',P' + str(P + 1) + ',V7.33,fine,tool2;\n')
-        else:
-            pass
+        G23WriteMoveInstrucion(speed, x1, y1, x2, y2, z)
+
         x = x2
         y = y2
         P += 2
@@ -192,26 +204,7 @@ def g3(a):  # 行序号引入
         x2 = round(x2, 3)
         y1 = round(y1.real, 3)
         y2 = round(y2.real, 3)  # 保留三位小数
-        if speed == 1:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x1) + ',' + str(y1) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('CONST robtarget P' + str(P + 1) + ':=[[' + str(x2) + ',' + str(y2) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveC P' + str(P) + ',P' + str(P + 1) + ',V4.75,fine,tool2;\n')
-        elif speed == 2:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x1) + ',' + str(y1) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('CONST robtarget P' + str(P + 1) + ':=[[' + str(x2) + ',' + str(y2) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveC P' + str(P) + ',P' + str(P + 1) + ',V10,fine,tool2;\n')
-        elif speed == 3:
-            w.write('CONST robtarget P' + str(P) + ':=[[' + str(x1) + ',' + str(y1) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('CONST robtarget P' + str(P + 1) + ':=[[' + str(x2) + ',' + str(y2) + ',' + str(z) + ']')
-            w.write(',[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n')
-            w.write('MoveC P' + str(P) + ',P' + str(P + 1) + ',V7.33,fine,tool2;\n')
-        else:
-            pass
+        G23WriteMoveInstrucion(speed, x1, y1, x2, y2, z)
         x = x2
         y = y2
         P += 2
@@ -219,6 +212,13 @@ def g3(a):  # 行序号引入
 
 
 with open(writefilename, 'w') as w:
+    w.write("MODULE Cut\n")
+    w.write("var robtarget Pi1;\n")
+    w.write("var robtarget Pi2;\n")
+    w.write("var robtarget P0;\n")
+    w.write("var robtarget P1;\n")
+    w.write("var robtarget P2;\n")
+    w.write("PROC MoveSub()\n")
     with open(readfilename) as f:
         lines = f.readlines()
     tol = len(lines)
@@ -242,3 +242,5 @@ with open(writefilename, 'w') as w:
             g3(i)
         else:
             continue
+    w.write("END PROC\n")
+    w.write("ENDMODULE")
