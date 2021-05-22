@@ -1,51 +1,50 @@
-readfilename = '1.txt'
-writefilename = '1-1.txt'
-speed = 1  # 走刀速度
+import math
 
+readfilename = '新椭球面 （全）- 型腔铣半精加工.txt'
+writefilename = '新椭球面 （全）- 型腔铣半精加工(师兄).txt'
+speed = 2  # 走刀速度
 
 P = 0  # 序号
 
-
-def G23WriteMoveInstrucion(speedi, x1, y1, x2, y2, z):
+def G23WriteMoveInstrucion(speedi,x1,y1,x2,y2,z):
     if speedi == 1:
         w.write(
-            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
         w.write(
-            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write('MoveC P01,P02,V5,fine,MyTool;\n')
+            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveC Pi1,Pi2,V100,fine,MyTool1\WObj:=Workobject_new;\n')
     elif speedi == 2:
         w.write(
-            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
         w.write(
-            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write('MoveC P01,P02,V10,fine,MyTool;\n')
+            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveC Pi1,Pi2,V150,fine,MyTool1\WObj:=Workobject_new;\n')
     elif speedi == 3:
         w.write(
-            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+            "Pi1:=[[" + str(x1) + ',' + str(y1) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
         w.write(
-            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write('MoveC P01,P02,V7,fine,MyTool;\n')
+            "Pi2:=[[" + str(x2) + ',' + str(y2) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveC Pi1,Pi2,V200,fine,MyTool1\WObj:=Workobject_new;\n')
     else:
         pass
 
 
-def G1WriteMoveInstrucion(speedi, x, y, z):
+def G1WriteMoveInstrucion(speedi,x,y,z):
     if speedi == 1:
         w.write(
-            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write("MoveL P1,v5,fine,MyTool;\n")
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v100,fine,MyTool1\WObj:=Workobject_new;\n")
 
     elif speedi == 2:
         w.write(
-            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write("MoveL P1,v10,fine,MyTool;\n")
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v150,fine,MyTool1\WObj:=Workobject_new;\n")
     elif speedi == 3:
         w.write(
-            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write("MoveL P1,v7,fine,MyTool;\n")
+            "P1:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write("MoveL P1,v200,fine,MyTool1\WObj:=Workobject_new;\n")
     else:
         pass
-
 
 def g0(a):  # 行序号引入
     aa = a  # 第aa行
@@ -76,8 +75,8 @@ def g0(a):  # 行序号引入
         y = round(y, 3)
         z = round(z, 3)  # 保留三位小数
         w.write(
-            "P0:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[1,0,0,0],[1,1,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
-        w.write('MoveJ P0,v40,fine,MyTool;\n')
+            "P0:=[[" + str(x) + ',' + str(y) + ',' + str(z) + "],[0,1,0,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];\n")
+        w.write('MoveJ P0,v400,fine,MyTool1\WObj:=Workobject_new;\n')
         P += 1
         aa += 1
 
@@ -110,7 +109,7 @@ def g1(a):  # 行序号引入
         x = round(x, 3)
         y = round(y, 3)
         z = round(z, 3)  # 保留三位小数
-        G1WriteMoveInstrucion(speed, str(x), str(y), str(z))
+        G1WriteMoveInstrucion(speed, str(x), str(y),str(z))
 
         P += 1
         aa += 1
@@ -145,13 +144,27 @@ def g2(a):  # 行序号引入
                 continue
         if flag or aa == tol - 1:
             break
-        x2 = x0 + x
-        y2 = y0 + y
-        x1 = 0.5 * (x0 + x2)  # 运算输出结果
-        if y0 >= 0:
-            y1 = y0 + J + (I ** 2 + J ** 2 - (0.5 * x - I) ** 2) ** 0.5
+        x2 =x
+        y2 =y
+        x3=(x0+x2)/2
+        y3=(y0+y2)/2
+        m=x3 - x0 - I
+        if m== 0:
+            theta =math.pi/2
         else:
-            y1 = y0 + J - (I ** 2 + J ** 2 - (0.5 * x - I) ** 2) ** 0.5
+            k = (y3 - y0 - J) / (x3 - x0 - I)
+            theta = math.atan(k)
+        R=math.sqrt(I**2+J**2)
+        d1=x0+I+R*math.cos(theta)
+        d2=y0+J+R*math.sin(theta)
+        d3=x0+I-R*math.cos(theta)
+        d4=y0+J-R*math.sin(theta)
+        if (d1-x3)**2+(d2-y3)**2-(d3-x3)**2-(d4-y3)**2>=0:
+            x1=d3
+            y1=d4
+        else:
+            x1=d1
+            y1=d2
         x1 = round(x1, 3)
         x2 = round(x2, 3)
         y1 = round(y1.real, 3)
@@ -173,9 +186,9 @@ def g3(a):  # 行序号引入
     global I
     global J
     global P
-    x0 = x  # 上一次的结果
-    y0 = y
     while True:
+        x0 = x  # 上一次的结果
+        y0 = y
         t = len(linelist[aa])  # 行列表长度
         for j in range(t):  # 第j个字符串
             if linelist[aa][j].startswith('X'):
@@ -193,13 +206,27 @@ def g3(a):  # 行序号引入
                 continue
         if flag or aa == tol - 1:
             break
-        x2 = x0 + x
-        y2 = y0 + y
-        x1 = 0.5 * (x0 + x2)  # 运算输出结果
-        if y0 >= 0:
-            y1 = y0 + J + (I ** 2 + J ** 2 - (0.5 * x - I) ** 2) ** 0.5
+        x2 = x
+        y2 = y
+        x3 = (x0 + x2) / 2
+        y3 = (y0 + y2) / 2
+        m=x3 - x0 - I
+        if m==0:
+            theta=math.pi/2
         else:
-            y1 = y0 + J - (I ** 2 + J ** 2 - (0.5 * x - I) ** 2) ** 0.5
+            k = (y3 - y0 - J) / (x3 - x0 - I)
+            theta = math.atan(k)
+        R = math.sqrt(I ** 2 + J ** 2)
+        d1 = x0 + I + R * math.cos(theta)
+        d2 = y0 + J + R * math.sin(theta)
+        d3 = x0 + I - R * math.cos(theta)
+        d4 = y0 + J - R * math.sin(theta)
+        if (d1 - x3) ** 2 + (d2 - y3) ** 2 - (d3 - x3) ** 2 - (d4 - y3) ** 2 >= 0:
+            x1 = d3
+            y1 = d4
+        else:
+            x1 = d1
+            y1 = d2
         x1 = round(x1, 3)
         x2 = round(x2, 3)
         y1 = round(y1.real, 3)
@@ -242,5 +269,5 @@ with open(writefilename, 'w') as w:
             g3(i)
         else:
             continue
-    w.write("END PROC\n")
+    w.write("ENDPROC\n")
     w.write("ENDMODULE")
